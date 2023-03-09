@@ -1,0 +1,14 @@
+.btn_custom{
+    width: 350px;
+    height: 75px;
+    font-size: 1.5rem;
+    color: #424F0C;
+    border: 2px solid #424F0C;
+    border-radius: 50px;
+    transition: all 0.7s;
+    &:hover{
+        color: white;
+        background-color: #424F0C;
+        transition: all 0.7s;
+    }
+}

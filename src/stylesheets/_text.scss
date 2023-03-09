@@ -1,0 +1,26 @@
+//doesn't work
+.link {
+  font-size: 1.5rem !important;
+  padding: 0 50px !important;
+  &:hover {
+    color: #904834 !important;
+  }
+}
+
+.heading {
+  max-width: 605px;
+  padding-bottom: 20px;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #424f0c;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  &_alt{
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 53px;
+  }
+}
+
+
