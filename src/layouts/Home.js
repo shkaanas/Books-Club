@@ -5,7 +5,7 @@ import heroPicture from '../images/hero-picture.png';
 export default function Home() {
   return (
     <Container maxWidth="xl">
-      <header className="layout">
+      <main className="layout">
         <div className=' layout layout_alt'>
           <h2 className='heading'>Books for your heart and soul</h2>
           <p className='heading heading_alt'>Some text here, even don’t know what to write</p>
@@ -14,7 +14,7 @@ export default function Home() {
         <div>
           <img src={heroPicture} alt='hero image' className='image'/>
         </div>
-      </header>
+      </main>
     </Container>
   );
 }
