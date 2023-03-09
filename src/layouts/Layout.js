@@ -1,17 +1,16 @@
-import { NavLink, Outlet } from 'react-router-dom';
+
+import { Outlet } from "react-router-dom";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 export default function Layout() {
   return (
     <>
-      <nav>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/catalog'>Catalog</NavLink>
-        <NavLink to='/profile'>Profile</NavLink>
-      </nav>
+      <Navigation />
       <main>
         <Outlet></Outlet>
       </main>
-      <footer></footer>
+      <Footer />
     </>
   );
 }

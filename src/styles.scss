@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanuman:wght@300;400;700&display=swap');
+@import './stylesheets/_navbar';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 *{
   box-sizing: border-box;
@@ -9,8 +12,17 @@
 body{
   margin: 0;
   padding: 0;
+  font-family: 'Hanuman', serif;
 }
 
 .errorPic{
   max-height: 90vh;
+}
+
+.link{
+  font-size: 1.5rem !important;
+  padding: 0 50px !important;
+  &:hover{
+    color: #904834 !important;
+  }
 }
