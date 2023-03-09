@@ -1,21 +1,13 @@
-import { Route, Routes } from 'react-router-dom';
-import './styles.css';
-import Home from './pages/Home';
-import Catalog from './pages/Сatalog'
-import NotFound from './pages/NotFound';
-
+import { RouterProvider } from "react-router-dom";
+import { router } from './routing.js'
+import './styles.scss';
 
 function App() {
   return (
-    <div>
-      <nav></nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <footer></footer>
-    </div>
+    
+      
+      <RouterProvider router={router}/>
+  
   );
 }
 
