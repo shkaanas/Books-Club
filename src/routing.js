@@ -4,6 +4,7 @@ import Catalog from './layouts/Сatalog.js'
 import Profile from "./layouts/Profile.js"
 import NotFound from './layouts/NotFound.js'
 import Layout from "./layouts/Layout.js"
+import AboutBook from './layouts/AbouBook.js'
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
+            },
+            {
+                path: '/book',
+                element: <AboutBook />
             }
         ]
     }, 
