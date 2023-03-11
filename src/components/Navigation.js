@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Container from '@mui/material/Container';
@@ -18,16 +18,15 @@ const pages = [
   },
 ];
 
-export default function Navigation() {
+export default function Navigation(props) {
   const navRef = useRef();
-  const [registered, setRegistered] = useState(false);
 
   const showNavbar = () => {
     navRef.current.classList.toggle('responsive_nav');
   };
 
   return (
-    <header className='header '>
+    <header className='header sticky top-0 z-50'>
       <Container className='header_inner'>
         <NavLink to="/">
           <img src={logo} alt="logo" />
@@ -38,7 +37,7 @@ export default function Navigation() {
               {page.name}
             </NavLink>
           ))}
-          <button className='btn btn_custom btn_custom__sign md:ml-5'>{registered ? 'Sign Out' : 'Sign In'}</button>
+          <button className='btn btn_custom btn_custom__sign md:ml-5'>{props.registered ? 'Sign Out' : 'Sign In'}</button>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <CloseIcon />
           </button>

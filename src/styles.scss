@@ -5,25 +5,22 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-}
-html{
+html {
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Hanuman', serif;
 }
 
 .errorPic {
-  max-height: 90vh;
+  max-height: 80vh;
+  margin: auto;
 }
 
 .layout {
   margin: 70px 0 30px 0;
+  padding-top: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
@@ -42,30 +39,32 @@ body {
 .decor {
   width: 100%;
   height: 150px;
+  &_alt {
+    position: relative;
+    top: -130px;
+  }
 }
 
-.block{
+.block {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
-
-//scroll
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: #ffffff;
+.cover {
+  position: relative;
+  width: 100%;
+  height: 570px;
+  max-height: 556px;
+  top: -100px;
+  z-index: -100;
+  &_alt {
+    height: 150px;
+    top: -190px;
+  }
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
-  background-color: #ffffff;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #424f0c;
+  display: none;
 }

@@ -19,11 +19,9 @@ export default function Card() {
               animi doloribus reprehenderit debitis voluptas pariatur eaque!
               Rem, accusamus tempora?
             </p>
-            <button className="btn btn_card mt-6">
-              <NavLink to="/book" >
-                Details
-              </NavLink>
-            </button>
+            <NavLink to="/book">
+              <button className="btn btn_card mt-6">Details</button>
+            </NavLink>
           </div>
         </div>
       </div>
