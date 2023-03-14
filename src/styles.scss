@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanuman:wght@300;400;700&display=swap');
 @import './stylesheets/_navbar', './stylesheets/buttons', './stylesheets/text',
-  './stylesheets/card';
+  './stylesheets/card', './stylesheets/_inputs';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -41,7 +41,7 @@ body {
   height: 150px;
   &_alt {
     position: relative;
-    top: -130px;
+    top: -120px;
   }
 }
 

@@ -1,5 +1,6 @@
 import { Container } from '@mui/system';
 import Card from '../components/Card.js';
+import Search from '../components/Search.js';
 import coverImg from '../images/hero-catalog.png';
 import whiteDecor from '../images/white-decor.png';
 
@@ -20,9 +21,15 @@ export default function Сatalog() {
           backgroundImage: `url(${whiteDecor})`,
         }}
       ></div>
-      <div className="layout">
+      <div>
         <Container maxWidth="xl">
-        <div className='block'>
+          <div className='block flex flex-wrap'>
+            <Search />
+            <Search />
+            <Search />
+
+          </div>
+          <div className="block">
             <Card />
             <Card />
             <Card />

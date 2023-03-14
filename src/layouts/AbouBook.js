@@ -26,8 +26,11 @@ export default function AboutBook() {
                     The Fairy Tales
                   </h2>
                   <h2 className="heading heading_alt text-left">Wilde O.</h2>
-                  <h3 className="heading heading_desc font-bold">
+                  <h3 className="heading heading_desc font-bold pb-0">
                     Genre: fairy tales
+                  </h3>
+                  <h3 className="heading heading_desc font-bold">
+                    Year: 1989
                   </h3>
                   <p className="heading heading_desc pb-10">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
