@@ -37,7 +37,7 @@ export default function Navigation(props) {
               {page.name}
             </NavLink>
           ))}
-          <button className='btn btn_custom btn_custom__sign md:ml-5'>{props.registered ? 'Sign Out' : 'Sign In'}</button>
+          <button className='btn btn_custom btn_custom__sign md:ml-5'>{props.registered ? 'Sign Out' : 'Log In'}</button>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <CloseIcon />
           </button>
