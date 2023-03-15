@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: '/book',
+        path: '/book/:id',
         element: <AboutBook />,
       },
       {
