@@ -4,7 +4,7 @@ import { Container } from '@mui/system';
 import whiteDecor from '../images/white-decor.png';
 import Loader from '../components/Loader.js';
 import coverImg from '../images/book.png';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const URL = 'https://openlibrary.org/works/';
 
@@ -12,7 +12,7 @@ export default function AboutBook() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -20,7 +20,7 @@ export default function AboutBook() {
       try {
         const response = await fetch(`${URL}${id}.json`);
         const data = await response.json();
-        console.log(data)
+        console.log(data);
 
         if (data) {
           const {
@@ -40,30 +40,33 @@ export default function AboutBook() {
               ? `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg`
               : coverImg,
             subject_places: subject_places
-              ? subject_places
+              ? subject_places.join(', ')
               : 'not found',
             subject_times: subject_times
-              ? subject_times
+              ? subject_times.join(', ')
               : 'not found',
-            subjects: subjects ? subjects : 'not found',
+            subjects: subjects ? subjects.join(', ') : 'not found',
           };
           setBook(newBook);
         } else {
           setBook(null);
         }
+        setLoading(false);
       } catch (error) {
         console.log(error);
         setLoading(false);
       }
     }
+
+    getBookDetails();
   }, [id]);
 
   // console.log(book);
-  if(loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <div>
-      <div className="">
+      <div>
         <div
           className="cover"
           style={{
@@ -77,17 +80,18 @@ export default function AboutBook() {
             }}
           >
             <Container maxWidth="xl">
-              <div className="layout">
-                <img src={book?.cover_img} alt='cover' className='card'/>
+              <div className="layout layout_alt">
+                <img src={book?.cover_img} alt="cover" className="card" />
                 <div className="">
-                  <h2 className="heading heading_alt text-left pb-0">
+                  <h2 className="heading heading_alt text-center pb-0">
                     {book?.title}
                   </h2>
-                  <h2 className="heading heading_alt text-left">Wilde O.</h2>
                   <h3 className="heading heading_desc font-bold pb-0">
-                    Genre: {book?.subjects}
+                    Subject: {book?.subjects}
                   </h3>
-                  <h3 className="heading heading_desc font-bold">Subject times: {book?.subject_times}</h3>
+                  {/* <h3 className="heading heading_desc font-bold">
+                    Subject times: {book?.subject_times}
+                  </h3> */}
                   <p className="heading heading_desc pb-10">
                     {book?.description}
                   </p>
