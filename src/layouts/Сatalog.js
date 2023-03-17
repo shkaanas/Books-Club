@@ -1,10 +1,32 @@
+import React from 'react';
+import { useGlobalContext } from '../context.js';
+import Loader from '../components/Loader.js';
+
 import { Container } from '@mui/system';
 import Card from '../components/Card.js';
 import Search from '../components/Search.js';
 import coverImg from '../images/hero-catalog.png';
 import whiteDecor from '../images/white-decor.png';
 
+// https://covers.openlibrary.org/b/id/240727-S.jpg
+
 export default function Сatalog() {
+  const { books, loading, resultTitle } = useGlobalContext();
+  
+  const booksWithCovers = books.map((singleBook) => {
+    return {
+      ...singleBook,
+      // removing works to get only id
+      id: singleBook.id.replace('/works/', ''),
+      cover_img: singleBook.cover_id
+        ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
+        : coverImg,
+    };
+  });
+
+  // console.log(booksWithCovers);
+  if (loading) return <Loader />;
+
   return (
     <div>
       <div className="">
@@ -23,18 +45,13 @@ export default function Сatalog() {
       ></div>
       <div>
         <Container maxWidth="xl">
-          <div className='block flex flex-wrap'>
+          <div className="block flex flex-wrap">
             <Search />
-            <Search />
-            <Search />
-
           </div>
           <div className="block">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {booksWithCovers.slice(0, 30).map((item, index) => {
+              return <Card key={index} {...item} />;
+            })}
           </div>
         </Container>
       </div>
