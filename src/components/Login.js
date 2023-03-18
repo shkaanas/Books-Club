@@ -6,9 +6,8 @@ import Alert from '@mui/material/Alert';
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  //here we directly use signup function from useAuth
-  const { signup } = useAuth();
+  //here we directly use login function from useAuth
+  const { login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -16,17 +15,13 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match');
-    }
-
     try {
       setError('');
       setLoading(false);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      navigate('/profile')
-    }catch(error) {
-      setError('Faild to create an account');
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate('/profile');
+    } catch (error) {
+      setError('Faild to log in');
     }
     setLoading(false);
   }
@@ -44,8 +39,11 @@ export default function Signup() {
         }}
       >
         <div className="m-auto flex flex-col ">
+          <h3 className="heading heading_alt heading_alt__white text-center pb-0">
+            Are you a member?
+          </h3>
           <h3 className="heading heading_alt heading_alt__white text-center">
-            Sign up
+            Log in!
           </h3>
           {error && <Alert severity="error">{error}</Alert>}
           <form className="flex flex-col items-center" onSubmit={handleSubmit}>
@@ -61,22 +59,16 @@ export default function Signup() {
               placeholder="Password..."
               className="input_wrapper input input_alt"
             />
-            <input
-              type="password"
-              ref={passwordConfirmRef}
-              placeholder="Confirm password..."
-              className=" input_wrapper input input_alt"
-            />
             <button
               className="btn_form w-full mt-12"
               type="submit"
               disabled={loading}
             >
-              Sign Up Now
+              Log In Now
             </button>
           </form>
           <span className="link link_alt">
-            Already have an account?<NavLink to='/login'> Log in</NavLink>
+            Need an account?<NavLink to="signup"> Sign Up</NavLink>
           </span>
         </div>
       </div>

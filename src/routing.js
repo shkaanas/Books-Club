@@ -6,6 +6,7 @@ import NotFound from './layouts/NotFound.js';
 import Layout from './layouts/Layout.js';
 import AboutBook from './layouts/AbouBook.js';
 import Signup from './components/Signup.js';
+import Login from './components/Login.js'
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },
