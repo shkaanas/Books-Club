@@ -23,14 +23,8 @@ export default function AboutBook() {
         console.log(data);
 
         if (data) {
-          const {
-            description,
-            title,
-            covers,
-            subject_places,
-            subject_times,
-            subjects,
-          } = data;
+          const { description, title, covers, first_publish_date, subjects } =
+            data;
           const newBook = {
             description: description
               ? description.value
@@ -39,12 +33,10 @@ export default function AboutBook() {
             cover_img: covers
               ? `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg`
               : coverImg,
-            subject_places: subject_places
-              ? subject_places.join(', ')
+            first_publish_date: first_publish_date
+              ? first_publish_date
               : 'not found',
-            subject_times: subject_times
-              ? subject_times.join(', ')
-              : 'not found',
+
             subjects: subjects ? subjects.join(', ') : 'not found',
           };
           setBook(newBook);
@@ -61,7 +53,6 @@ export default function AboutBook() {
     getBookDetails();
   }, [id]);
 
-  // console.log(book);
   if (loading) return <Loader />;
 
   return (
@@ -84,17 +75,11 @@ export default function AboutBook() {
                 <img src={book?.cover_img} alt="cover" className="card" />
                 <div className="">
                   <h2 className="heading heading_alt text-center pb-0">
-                    {book?.title}
+                    {book?.title} / {book?.first_publish_date}
                   </h2>
                   <h3 className="heading heading_desc font-bold pb-0">
                     Subject: {book?.subjects}
                   </h3>
-                  {/* <h3 className="heading heading_desc font-bold">
-                    Subject times: {book?.subject_times}
-                  </h3> */}
-                  <p className="heading heading_desc pb-10">
-                    {book?.description}
-                  </p>
                   <button className="btn btn_custom btn_custom__sign">
                     download
                   </button>

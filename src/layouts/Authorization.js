@@ -13,7 +13,7 @@ export default function Auhtorization() {
       >
         <div className="m-auto flex flex-col ">
           <h3 className="heading heading_alt heading_alt__white text-center">
-            Bookclub member? Log In
+            Sign up
           </h3>
           <form className="flex flex-col items-center">
             <input
@@ -27,7 +27,7 @@ export default function Auhtorization() {
               className="input input_alt"
             />
             <button className="btn_form btn_form_alt">Log in now</button>
-            <button className="btn_form">Sign up</button>
+            <button className="btn_form">Log in</button>
           </form>
         </div>
       </div>
