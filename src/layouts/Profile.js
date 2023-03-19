@@ -1,21 +1,25 @@
+import React from 'react';
 import { Container } from '@mui/system';
-import loginImg from '../images/log_in.jpg';
+import { useAuth } from '../AuthContext';
 
-export default function Profile(props) {
+import team from '../images/team.jpg';
+
+export default function Profile() {
+  const { currentUser } = useAuth();
+  
   return (
     <div>
       <Container maxWidth="xl">
-        {props.registered ? (
+        {currentUser ? (
           <div
             className="errorPic"
             style={{ width: '500px', height: '500px', backgroundColor: 'red' }}
           ></div>
         ) : (
-          <div
-            className="errorPic"
-            style={{ width: '500px', height: '500px', backgroundColor: 'green' }}
-          ></div>
-          // <img src={loginImg} alt="log in" className="errorPic" />
+          <div >
+            <h2 className='heading heading_alt text-center mx-auto p-0'>Do you want to be our member? Sign Up!</h2>
+            <img src={team} alt="join us" className="errorPic" />
+          </div>
         )}
       </Container>
     </div>

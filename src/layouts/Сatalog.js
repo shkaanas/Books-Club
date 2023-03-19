@@ -6,6 +6,7 @@ import { Container } from '@mui/system';
 import Card from '../components/Card.js';
 import Search from '../components/Search.js';
 import coverImg from '../images/hero-catalog.png';
+import cover from '../images/book.png'
 import whiteDecor from '../images/white-decor.png';
 
 // https://covers.openlibrary.org/b/id/240727-S.jpg
@@ -20,7 +21,7 @@ export default function Сatalog() {
       id: singleBook.id.replace('/works/', ''),
       cover_img: singleBook.cover_id
         ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
-        : coverImg,
+        : cover,
     };
   });
 
