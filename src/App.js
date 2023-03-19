@@ -6,7 +6,7 @@ function App() {
   // const [registered, setRegistered] = useState(true);
   return (
     <AppProvider>
-      <RouterProvider router={router}></RouterProvider>;
+      <RouterProvider router={router}></RouterProvider>
     </AppProvider>
   );
 }

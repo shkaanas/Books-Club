@@ -24,8 +24,8 @@ export default function Signup() {
       setError('');
       setLoading(false);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate('/profile')
-    }catch(error) {
+      navigate('/profile');
+    } catch (error) {
       setError('Faild to create an account');
     }
     setLoading(false);
@@ -75,9 +75,9 @@ export default function Signup() {
               Sign Up Now
             </button>
           </form>
-          <span className="link link_alt">
-            Already have an account?<NavLink to='/login'> Log in</NavLink>
-          </span>
+          <NavLink to="/login" className="link link_alt">
+            Already have an account? Log in
+          </NavLink>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanuman:wght@300;400;700&display=swap');
 @import './stylesheets/_navbar', './stylesheets/buttons', './stylesheets/text',
-  './stylesheets/card', './stylesheets/_inputs', './stylesheets/loader';
+  './stylesheets/card', './stylesheets/_inputs', './stylesheets/loader',
+  './stylesheets/profile';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +15,7 @@ body {
 }
 
 .errorPic {
-  max-height: 80vh;
+  max-height: 70vh;
   margin: auto;
 }
 

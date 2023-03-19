@@ -67,9 +67,9 @@ export default function Signup() {
               Log In Now
             </button>
           </form>
-          <span className="link link_alt">
-            Need an account?<NavLink to="signup"> Sign Up</NavLink>
-          </span>
+          <NavLink to="/signup" className="link link_alt">
+            Need an account? Sign Up
+          </NavLink>
         </div>
       </div>
     </div>
