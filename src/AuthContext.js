@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from 'firebase/auth';
 import { auth } from './firebase';
 
@@ -25,9 +25,15 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function signout(){
-    return signOut(auth);
-  }
+  // function signout(){
+  //   return signOut(auth);
+  // }
+
+  const signout = () => {
+    signOut(auth).then(() => {
+      localStorage.clear();
+    });
+  };
 
   useEffect(() => {
     //instance function that give us an info about registered user
@@ -43,7 +49,7 @@ export function AuthProvider({ children }) {
     currentUser,
     signup,
     login,
-    signout
+    signout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

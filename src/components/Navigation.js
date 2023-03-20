@@ -36,7 +36,7 @@ export default function Navigation(props) {
         </NavLink>
         <nav ref={navRef} className="nav">
           {pages.map((page) => (
-            <NavLink key={page.id} to={page.path} className="link">
+            <NavLink key={page.id} to={page.path} onClick={showNavbar} className="link">
               {page.name}
             </NavLink>
           ))}

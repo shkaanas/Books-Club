@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/system';
 import { useAuth } from '../AuthContext';
 import team from '../images/team.jpg';
 import profile from '../images/profile.png';
-import coverImg from '../images/book.png';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../firebase';
+import Rating from '@mui/material/Rating';
 
 export default function Profile() {
   const { currentUser } = useAuth();
+  const [commentsList, setCommentsList] = useState([]);
+  const commentsCollectionRef = collection(db, 'userComments');
+
+  useEffect(() => {
+    async function getPosts() {
+      const data = await getDocs(commentsCollectionRef);
+      setCommentsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    getPosts();
+    // console.log(commentsList);
+  }, []);
 
   return (
     <div>
@@ -17,17 +31,20 @@ export default function Profile() {
             className="cover cover_alt flex flex-col justify-end"
             style={{
               backgroundColor: '#E9DCCB',
-              minHeight: '400px',
+              minHeight: '450px',
             }}
           >
             <Container maxWidth="xl">
               <div className="layout">
-                <img src={profile} alt="profile" className="profile_img" />
+                <div className="flex flex-col justify-center">
+                  <img src={profile} alt="profile" className="profile_img" />
+                  <span className="text-center mx-auto">
+                    Edit profile
+                    <ModeEditOutlinedIcon />
+                  </span>
+                </div>
                 <div>
                   <h2 className="heading heading_alt">{currentUser.email}</h2>
-                  <span>
-                    <ModeEditOutlinedIcon /> Edit profile
-                  </span>
                 </div>
               </div>
             </Container>
@@ -36,25 +53,46 @@ export default function Profile() {
             <h2 className="heading heading_alt text-center mx-auto p-0">
               My rated books
             </h2>
+            {/* ask about this logic */}
             <div className="card-wrapper">
-              <div className="profile_card">
-                <img src={coverImg} alt="cover" className="profile_card__img" />
-                <div className="profile_card__text">
-                  <h3 className="heading heading_alt heading_alt__white p-0 text-start">
-                    bla bla bla
-                  </h3>
-                  <h3 className="heading_alt heading_alt__white heading_desc">
-                    Genre: bla bla bla
-                  </h3>
-                  <span>stars here</span>
-                  <p className="heading_alt heading_alt__white heading_desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
-                </div>
-              </div>
+              {commentsList.map((comment) => {
+                return (
+                  <div>
+                    {comment.author.id === currentUser.uid && (
+                      <div key={comment.id} className="profile_card">
+                        <img
+                          src={comment.cover}
+                          alt={comment.title}
+                          className="profile_card__img"
+                        />
+                        <div className="profile_card__text">
+                          <h3 className="heading heading_alt heading_alt__white p-0 text-start">
+                            {comment.title}
+                          </h3>
+                          <h3 className="heading_alt heading_alt__white heading_desc">
+                            Author:{' '}
+                            {comment.author.name !== null
+                              ? comment.author.name
+                              : comment.author.email}
+                          </h3>
+
+                          <Rating
+                            name="read-only"
+                            value={comment.rating}
+                            readOnly
+                            sx={{
+                              margin: '10px',
+                            }}
+                          />
+                          <p className="heading_alt heading_alt__white heading_desc">
+                            {comment.comment}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </Container>
         </div>
