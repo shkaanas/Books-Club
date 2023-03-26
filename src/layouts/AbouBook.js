@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { Container } from '@mui/system';
-import whiteDecor from '../images/white-decor.png';
+//components
 import Loader from '../components/Loader.js';
-import coverImg from '../images/book.png';
-import Rating from '@mui/material/Rating';
-import { addDoc, collection } from 'firebase/firestore';
+import CommentCard from '../components/CommentCard';
 import { useAuth } from '../AuthContext';
+//firestore
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
+//mui
+import { Container } from '@mui/system';
+import Rating from '@mui/material/Rating';
+//images
+import whiteDecor from '../images/white-decor.png';
+import coverImg from '../images/book.png';
 
 const URL = 'https://openlibrary.org/works/';
 
@@ -18,10 +23,23 @@ export default function AboutBook() {
   //for rating
   const [value, setValue] = useState(1);
   const [comment, setComment] = useState('');
-  const [clicked, setClicked] = useState(false);
+
+  const [clicked, setClicked] = useState('');
   const { currentUser } = useAuth();
 
   const commentsCollectionRef = collection(db, 'userComments');
+
+  //for importing users from db
+  const [commentsList, setCommentsList] = useState([]);
+  useEffect(() => {
+    async function getPosts() {
+      const data = await getDocs(commentsCollectionRef);
+      setCommentsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    getPosts();
+    // console.log(commentsList);
+  }, []);
 
   //saving data to the firebase
   async function createComment() {
@@ -38,10 +56,10 @@ export default function AboutBook() {
         id: currentUser.uid,
       },
     });
-  
-    
+    setClicked('done');
   }
 
+  // loads book
   useEffect(() => {
     setLoading(true);
     async function getBookDetails() {
@@ -124,13 +142,13 @@ export default function AboutBook() {
           {currentUser ? (
             <Container maxWidth="xl" className="flex flex-col">
               <h2 className="heading heading_alt text-center pb-0 mx-auto">
-                {clicked
+                {clicked === 'done'
                   ? 'Thanks for your review!'
                   : 'Leave your comment below'}
               </h2>
 
               {/* here we need check with book id, but on the other page "profile" check in current user id */}
-              {!clicked && (
+              {clicked !== 'done' && (
                 <div className="flex flex-col justify-center">
                   <Rating
                     name="simple-controlled"
@@ -184,6 +202,20 @@ export default function AboutBook() {
               </div>
             </Container>
           )}
+
+          <Container maxWidth="xl">
+            <div className="card-wrapper">
+              {commentsList.map((comment) => {
+                return (
+                  <div>
+                    {`${URL}${id}` === comment.bookId && (
+                      <CommentCard comment={comment} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </Container>
         </div>
       </div>
     </div>

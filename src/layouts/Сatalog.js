@@ -1,10 +1,11 @@
 import React from 'react';
 import { useGlobalContext } from '../context.js';
-import Loader from '../components/Loader.js';
-
 import { Container } from '@mui/system';
+//components
+import Loader from '../components/Loader.js';
 import Card from '../components/Card.js';
 import Search from '../components/Search.js';
+//images
 import coverImg from '../images/hero-catalog.png';
 import cover from '../images/book.png'
 import whiteDecor from '../images/white-decor.png';
