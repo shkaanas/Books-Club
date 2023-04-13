@@ -7,8 +7,8 @@ export default function Card(book) {
     <div>
       <div className="card">
         <div className="content">
-          <div>
-            <img className="profile w-full rounded-3xl" src={book.cover_img} alt="cover" />
+          <div className='rounded-3xl overflow-hidden relative'>
+            <img className="rounded-3xl" src={book.cover_img} alt="cover" />
           </div>
           <div className="back from-bottom justify-between flex flex-col">
             <div>

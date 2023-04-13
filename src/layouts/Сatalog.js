@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useGlobalContext } from '../context.js';
 import { Container } from '@mui/system';
-//components
 import Loader from '../components/Loader.js';
 import Card from '../components/Card.js';
 import Search from '../components/Search.js';
-//images
 import coverImg from '../images/hero-catalog.png';
 import cover from '../images/book.png'
 import whiteDecor from '../images/white-decor.png';
@@ -14,8 +12,12 @@ import whiteDecor from '../images/white-decor.png';
 
 export default function Сatalog() {
   const { books, loading, resultTitle } = useGlobalContext();
-  
-  const booksWithCovers = books.map((singleBook) => {
+
+  const [booksWithCovers, setBooksWithCovers] = useState([])
+  const [bookProcessing, setBookProcessing] = useState(true)
+  useEffect(() => {
+
+    const booksWithCovers = books.map((singleBook) => {
     return {
       ...singleBook,
       // removing works to get only id
@@ -25,9 +27,37 @@ export default function Сatalog() {
         : cover,
     };
   });
+  //краше валідувати booksWithCovers
+  if(booksWithCovers.length > 0){
+    setBooksWithCovers(booksWithCovers)
+  }
+
+  }, [books])
+
+  useEffect(() => {
+    if(booksWithCovers.length > 0){
+      setBookProcessing(false)
+    }
+  }, [booksWithCovers])
+  
+
+  //old code
+  // const booksWithCovers = books.map((singleBook) => {
+  //   console.log(singleBook)
+  //   return {
+  //     ...singleBook,
+  //     // removing works to get only id
+  //     id: singleBook.id.replace('/works/', ''),
+  //     cover_img: singleBook.cover_id
+  //       ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
+  //       : cover,
+  //   };
+  // });
 
   // console.log(booksWithCovers);
-  if (loading) return <Loader />;
+  if (loading || bookProcessing) return <Loader />;
+  
+  // if (loading) return <Loader />;
 
   return (
     <div>
