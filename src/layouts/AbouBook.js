@@ -66,7 +66,6 @@ export default function AboutBook() {
       try {
         const response = await fetch(`${URL}${id}.json`);
         const data = await response.json();
-        // console.log(data);
 
         if (data) {
           const { description, title, covers, first_publish_date, subjects } =
@@ -147,7 +146,6 @@ export default function AboutBook() {
                   : 'Leave your comment below'}
               </h2>
 
-              {/* here we need check with book id, but on the other page "profile" check in current user id */}
               {clicked !== 'done' && (
                 <div className="flex flex-col justify-center">
                   <Rating
@@ -207,11 +205,9 @@ export default function AboutBook() {
             <div className="card-wrapper">
               {commentsList.map((comment) => {
                 return (
-                  <div>
-                    {`${URL}${id}` === comment.bookId && (
-                      <CommentCard comment={comment} />
-                    )}
-                  </div>
+                  `${URL}${id}` === comment.bookId && (
+                    <CommentCard key={comment.id} comment={comment} />
+                  )
                 );
               })}
             </div>

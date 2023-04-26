@@ -22,7 +22,6 @@ const pages = [
 export default function Navigation(props) {
   const navRef = useRef();
   const { currentUser, signout } = useAuth();
-  console.log(currentUser)
 
   const showNavbar = () => {
     navRef.current.classList.toggle('responsive_nav');

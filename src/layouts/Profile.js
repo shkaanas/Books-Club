@@ -9,10 +9,11 @@ import team from '../images/team.jpg';
 import profile from '../images/profile.png';
 
 export default function Profile() {
-  const { currentUser } = useAuth();
+  const { currentUser, updating } = useAuth();
   const [commentsList, setCommentsList] = useState([]);
   const commentsCollectionRef = collection(db, 'userComments');
   const [userName, setUserName] = useState('');
+  const [photo, setPhoto] = useState(null);
   const [editing, setEditing] = useState(false);
   // const [newUserEmail, setNewUserEmail] = useState();
 
@@ -21,22 +22,25 @@ export default function Profile() {
       const data = await getDocs(commentsCollectionRef);
       setCommentsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
+
     getPosts();
   }, []);
 
-  //editing profile
-  async function updateUser(event) {
-    event.preventDefault();
-    const userDoc = doc(db, 'userComments', currentUser);
-    await updateDoc(userDoc, {
-      'author.name': `${userName}`,
-    });
-    // setEditing(false);
-  }
+  // editing profile
+  // async function updateUser(event) {
+  //   event.preventDefault();
+  //   const userDoc = doc(db, 'userComments', currentUser);
+  //   await updateDoc(userDoc, {
+  //     author: {...`${userName}`},
+  //   });
 
-  useEffect(() => {
-    console.log('editing', editing)
-  }, [editing]) 
+  //   setEditing(false);
+  // }
+
+  function updateUser() {
+    updating(userName, photo);
+    setEditing(false);
+  }
 
   return (
     <div>
@@ -53,7 +57,7 @@ export default function Profile() {
               <div className="layout">
                 <div className="flex flex-col justify-center">
                   <img
-                    src={profile}
+                    src={photo ? photo : profile}
                     alt="profile"
                     className="profile_img mx-auto mb-2"
                   />
@@ -77,19 +81,24 @@ export default function Profile() {
                       className="input_wrapper input input_alt"
                       onChange={(event) => setUserName(event.target.value)}
                     />
-                    <button className="btn_card ml-auto" onClick={updateUser}>
+                    <input
+                      type="text"
+                      placeholder="Photo URL..."
+                      className="input_wrapper input input_alt"
+                      onChange={(event) => setPhoto(event.target.value)}
+                    />
+                    <button className="btn_card mr-auto" onClick={updateUser}>
                       Change
                     </button>
                   </div>
                 ) : (
-                  <div>
+                  <div className='flex flex-col items-start'>
                     {currentUser.displayName && (
                       <h2 className="heading heading_alt mt-8">
                         {currentUser.displayName}
                       </h2>
                     )}
                     <h2 className="heading heading_alt">{currentUser.email}</h2>
-                    <button></button>
                   </div>
                 )}
               </div>
@@ -99,16 +108,12 @@ export default function Profile() {
             <h2 className="heading heading_alt text-center mx-auto p-0">
               My rated books
             </h2>
-            {/* <button className='btn_custom ' onClick={() => console.log('hi there')}>hi there</button> */}
-            {/* ask about this logic */}
             <div className="card-wrapper">
               {commentsList.map((comment) => {
                 return (
-                  <div>
-                    {comment.author.id === currentUser.uid && (
-                      <CommentCard comment={comment} />
-                    )}
-                  </div>
+                  comment.author.id === currentUser.uid && (
+                    <CommentCard key={comment.id} comment={comment} />
+                  )
                 );
               })}
             </div>

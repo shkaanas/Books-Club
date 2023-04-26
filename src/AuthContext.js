@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from './firebase';
 
@@ -30,6 +31,23 @@ export function AuthProvider({ children }) {
     });
   };
 
+  const updating = (name, photo) => {
+    if (photo === '') {
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      }).then(() => {
+        console.log('success');
+      });
+    } else {
+      updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
+      }).then(() => {
+        console.log('success');
+      });
+    }
+  };
+
   useEffect(() => {
     //instance function that give us an info about registered user
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,6 +62,7 @@ export function AuthProvider({ children }) {
     signup,
     login,
     signout,
+    updating,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

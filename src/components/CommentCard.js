@@ -3,7 +3,7 @@ import Rating from '@mui/material/Rating';
 
 export default function CommentCard({ comment }) {
   return (
-    <div key={comment.id} className="profile_card">
+    <div className="profile_card">
       <img
         src={comment.cover}
         alt={comment.title}
