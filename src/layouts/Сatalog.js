@@ -75,9 +75,8 @@ export default function Сatalog() {
           backgroundImage: `url(${whiteDecor})`,
         }}
       ></div>
-      <div>
-        <Container maxWidth="xl">
-          <div className="block flex flex-wrap">
+        <Container maxWidth="xl" className="decor_alt">
+          <div className="block">
             <Search />
           </div>
           <div className="block">
@@ -86,7 +85,6 @@ export default function Сatalog() {
             })}
           </div>
         </Container>
-      </div>
     </div>
   );
 }

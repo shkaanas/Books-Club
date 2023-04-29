@@ -12,7 +12,7 @@ const URL = 'https://openlibrary.org/search.json?title=';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [searchTerm, setSearchTerm] = useState('Harry Potter');
+  const [searchTerm, setSearchTerm] = useState('flower');
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [resultTitle, setResultTitle] = useState('');
@@ -24,7 +24,7 @@ const AppProvider = ({ children }) => {
       const response = await fetch(`${URL}${searchTerm}`);
       const data = await response.json();
       const { docs } = data;
-      // console.log(docs);
+      console.log(docs);
 
       if (docs) {
         const newBooks = docs.slice(0, 20).map((bookSingle) => {
@@ -41,7 +41,7 @@ const AppProvider = ({ children }) => {
             auuthor: author_name,
             cover_id: cover_i,
             edition_count: edition_count,
-            first_publish_year: first_publish_year,
+            publish_year: first_publish_year,
             title: title,
           };
         });

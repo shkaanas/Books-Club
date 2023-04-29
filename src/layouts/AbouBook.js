@@ -80,7 +80,7 @@ export default function AboutBook() {
               : coverImg,
             first_publish_date: first_publish_date
               ? first_publish_date
-              : 'not found',
+              : 'year not found',
 
             subjects: subjects ? subjects.join(', ') : 'not found',
           };
@@ -118,14 +118,14 @@ export default function AboutBook() {
             <Container maxWidth="xl">
               <div className="layout layout_alt">
                 <img src={book?.cover_img} alt="cover" className="card" />
-                <div className="">
+                <div className="flex flex-col justify-center">
                   <h2 className="heading heading_alt text-center pb-0">
                     {book?.title} / {book?.first_publish_date}
                   </h2>
                   <h3 className="heading heading_desc font-bold pb-0">
                     Subject: {book?.subjects}
                   </h3>
-                  <button className="btn btn_custom btn_custom__sign mx-auto mb-10">
+                  <button className="btn btn_custom btn_custom__sign mx-auto my-10">
                     download
                   </button>
                 </div>

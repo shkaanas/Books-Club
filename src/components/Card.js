@@ -7,13 +7,13 @@ export default function Card(book) {
     <div>
       <div className="card">
         <div className="content">
-          <div className='rounded-3xl overflow-hidden relative'>
-            <img className="rounded-3xl" src={book.cover_img} alt="cover" />
+          <div className='relative'>
+            <img className="card_img" src={book.cover_img} alt="cover" />
           </div>
           <div className="back from-bottom justify-between flex flex-col">
             <div>
               <h3 className="card_heading">{book.auuthor}</h3>
-              <h3 className="card_heading">{book.title}</h3>
+              <h3 className="card_heading">{book.title.substring(0,10)}</h3>
             </div>
             <NavLink to={`/book/${book.id}`} {...book}>
               <button className="btn btn_card mt-6">Details</button>

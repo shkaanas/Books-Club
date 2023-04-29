@@ -31,14 +31,13 @@ export default function Search() {
         <div className="input_wrapper flex content-center ">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search title..."
             className="input input_search"
             ref={searchText}
           />
           <button
             type="submit"
             className="flex items-center"
-            onClick={handleSubmit}
           >
             <SearchIcon />
           </button>

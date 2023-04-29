@@ -50,16 +50,18 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  @media only screen and (max-width: 1024px) {
+   
+  }
 }
 
 .cover {
   position: relative;
   width: 100%;
-  height: 570px;
+  height: 370px;
   max-height: 556px;
   top: -100px;
-  // z-index: -100;
   &_alt {
     height: 150px;
     top: -190px;
