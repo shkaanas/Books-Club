@@ -1,63 +1,58 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../context.js';
 import { Container } from '@mui/system';
 import Loader from '../components/Loader.js';
 import Card from '../components/Card.js';
 import Search from '../components/Search.js';
 import coverImg from '../images/hero-catalog.png';
-import cover from '../images/book.png'
+import cover from '../images/book.png';
 import whiteDecor from '../images/white-decor.png';
+import Pagination from '@mui/material/Pagination';
+import usePagination from '../components/Pagination';
 
 // https://covers.openlibrary.org/b/id/240727-S.jpg
 
 export default function Сatalog() {
   const { books, loading, resultTitle } = useGlobalContext();
 
-  const [booksWithCovers, setBooksWithCovers] = useState([])
-  const [bookProcessing, setBookProcessing] = useState(true)
-  useEffect(() => {
+  const [booksWithCovers, setBooksWithCovers] = useState([]);
+  const [bookProcessing, setBookProcessing] = useState(true);
 
+  const [page, setPage] = useState(1);
+  const PER_PAGE = 24;
+
+  const count = Math.ceil(booksWithCovers.length / PER_PAGE);
+  const _DATA = usePagination(booksWithCovers, PER_PAGE);
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
+
+  useEffect(() => {
     const booksWithCovers = books.map((singleBook) => {
-    return {
-      ...singleBook,
-      // removing works to get only id
-      id: singleBook.id.replace('/works/', ''),
-      cover_img: singleBook.cover_id
-        ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
-        : cover,
-    };
-  });
-  //краше валідувати booksWithCovers
-  if(booksWithCovers.length > 0){
-    setBooksWithCovers(booksWithCovers)
-  }
-
-  }, [books])
+      return {
+        ...singleBook,
+        // removing works to get only id
+        id: singleBook.id.replace('/works/', ''),
+        cover_img: singleBook.cover_id
+          ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
+          : cover,
+      };
+    });
+    
+    if (booksWithCovers.length > 0) {
+      setBooksWithCovers(booksWithCovers);
+    }
+  }, [books]);
 
   useEffect(() => {
-    if(booksWithCovers.length > 0){
-      setBookProcessing(false)
+    if (booksWithCovers.length > 0) {
+      setBookProcessing(false);
     }
-  }, [booksWithCovers])
-  
+  }, [booksWithCovers]);
 
-  //old code
-  // const booksWithCovers = books.map((singleBook) => {
-  //   console.log(singleBook)
-  //   return {
-  //     ...singleBook,
-  //     // removing works to get only id
-  //     id: singleBook.id.replace('/works/', ''),
-  //     cover_img: singleBook.cover_id
-  //       ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg`
-  //       : cover,
-  //   };
-  // });
-
-  // console.log(booksWithCovers);
   if (loading || bookProcessing) return <Loader />;
-  
-  // if (loading) return <Loader />;
 
   return (
     <div>
@@ -75,16 +70,24 @@ export default function Сatalog() {
           backgroundImage: `url(${whiteDecor})`,
         }}
       ></div>
-        <Container maxWidth="xl" className="decor_alt">
-          <div className="block">
-            <Search />
-          </div>
-          <div className="block">
-            {booksWithCovers.slice(0, 30).map((item, index) => {
-              return <Card key={index} {...item} />;
-            })}
-          </div>
-        </Container>
+      <Container maxWidth="xl" className="decor_alt">
+        <div className="block">
+          <Search updatePagy={setPage} data={_DATA}/>
+        </div>
+        <div className="block">
+          {_DATA.currentData().map((item, index) => {
+            return <Card key={index} {...item} />;
+          })}
+        </div>
+        <div className="block mt-10">
+          <Pagination
+            count={count}
+            size="large"
+            page={page}
+            onChange={handleChange}
+          />
+        </div>
+      </Container>
     </div>
   );
 }

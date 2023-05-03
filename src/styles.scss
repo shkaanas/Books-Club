@@ -51,8 +51,10 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  &_margins {
+    margin: 70px auto;
+  }
   @media only screen and (max-width: 1024px) {
-   
   }
 }
 
@@ -68,6 +70,19 @@ body {
   }
 }
 
+.bg {
+  &_green {
+    background-color: #637562;
+  }
+  &_color {
+    background-color: #E9DCCB;
+  }
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
+
+
+// pagination test
+

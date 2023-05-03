@@ -3,7 +3,7 @@
   padding-bottom: 20px;
   font-size: 4rem;
   font-weight: 700;
-  color: #424f0c;
+  color: #637562;
   align-items: center;
   text-align: center;
   letter-spacing: 0.05em;
@@ -11,7 +11,7 @@
     font-size: 2rem;
     font-weight: 400;
     line-height: 53px;
-    &__white{
+    &__white {
       color: white;
     }
   }
@@ -42,19 +42,32 @@
 .link {
   font-size: 1.25rem;
   padding: 0 50px;
-  color: #424f0c;
+  color: #637562;
   transition: all 0.7s;
   cursor: pointer;
   &:hover {
     color: #904834;
   }
 
-  &_alt{
+  &_alt {
     text-align: center;
     color: white;
     padding: 10px 0;
-    &:hover{
-      color: #424f0c;
+    &:hover {
+      color: #637562;
     }
+  }
+}
+
+.desc_common {
+  font-size: 1.5rem;
+  text-align: center;
+  // letter-spacing: 0.05em;
+  font-weight: 400;
+  &_green {
+    color: #637562;
+  }
+  &_white {
+    color: white;
   }
 }

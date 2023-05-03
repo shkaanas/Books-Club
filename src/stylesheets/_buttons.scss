@@ -2,13 +2,13 @@
   width: 350px;
   height: 75px;
   font-size: 1.5rem;
-  color: #424f0c;
-  border: 2px solid #424f0c;
+  color: #637562;
+  border: 2px solid #637562;
   border-radius: 50px;
   transition: all 0.7s;
   &:hover {
     color: white;
-    background-color: #424f0c;
+    background-color: #637562;
     transition: all 0.7s;
   }
   &__sign {
@@ -16,7 +16,7 @@
     height: 50px;
     font-size: 1rem;
     color: white;
-    background-color: #424f0c;
+    background-color: #637562;
     &:hover {
       background-color: #5a6d10;
       border: 2px solid #5a6d10;
@@ -37,7 +37,7 @@
   transition: all 0.7s;
   cursor: pointer;
   &:hover{
-    color: #424F0C;
+    color: #637562;
     background-color: white;
     transition: all 0.7s;
   }

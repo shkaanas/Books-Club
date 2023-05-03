@@ -13,7 +13,7 @@ export default function Card(book) {
           <div className="back from-bottom justify-between flex flex-col">
             <div>
               <h3 className="card_heading">{book.auuthor}</h3>
-              <h3 className="card_heading">{book.title.substring(0,10)}</h3>
+              <h3 className="card_heading">{book.title}</h3>
             </div>
             <NavLink to={`/book/${book.id}`} {...book}>
               <button className="btn btn_card mt-6">Details</button>

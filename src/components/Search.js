@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function Search() {
+export default function Search({updatePagy, data}) {
   const { setSearchTerm, setResultTitle } = useGlobalContext(); //read more
   const searchText = useRef(''); //read more
-  const navigate = useNavigate(); //read more
+  const navigate = useNavigate(); 
 
   useEffect(() => searchText.current.focus(), []);
 
@@ -18,6 +18,8 @@ export default function Search() {
       setResultTitle('please enter smth...');
     } else {
       setSearchTerm(searchText.current.value);
+      updatePagy(1)
+      data.jump(1)
     }
     navigate('/catalog');
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 import CommentCard from '../components/CommentCard';
-import { getDocs, collection, doc, updateDoc } from 'firebase/firestore';
+import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Container } from '@mui/system';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
