@@ -15,7 +15,6 @@ export default function Profile() {
   const [userName, setUserName] = useState('');
   const [photo, setPhoto] = useState(null);
   const [editing, setEditing] = useState(false);
-  // const [newUserEmail, setNewUserEmail] = useState();
 
   useEffect(() => {
     async function getPosts() {
@@ -26,19 +25,11 @@ export default function Profile() {
     getPosts();
   }, []);
 
-  // editing profile
-  // async function updateUser(event) {
-  //   event.preventDefault();
-  //   const userDoc = doc(db, 'userComments', currentUser);
-  //   await updateDoc(userDoc, {
-  //     author: {...`${userName}`},
-  //   });
-
-  //   setEditing(false);
-  // }
-
   function updateUser() {
-    updating(userName, photo);
+    let tempName = userName.trim();
+    if (tempName.replace(/[^\w\s]/gi, '').length !== 0) {
+      updating(userName, photo);
+    }
     setEditing(false);
   }
 
@@ -57,7 +48,7 @@ export default function Profile() {
               <div className="layout">
                 <div className="flex flex-col justify-center">
                   <img
-                    src={photo ? photo : profile}
+                    src={currentUser.photoURL ? currentUser.photoURL : profile}
                     alt="profile"
                     className="profile_img mx-auto mb-2"
                   />
@@ -92,7 +83,7 @@ export default function Profile() {
                     </button>
                   </div>
                 ) : (
-                  <div className='flex flex-col items-start'>
+                  <div className="flex flex-col items-start">
                     {currentUser.displayName && (
                       <h2 className="heading heading_alt mt-8">
                         {currentUser.displayName}

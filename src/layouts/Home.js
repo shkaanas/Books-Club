@@ -4,8 +4,11 @@ import { NavLink } from 'react-router-dom';
 import heroPicture from '../images/hero-picture.png';
 import brownDecor from '../images/brown-decor.png';
 import aboutImg from '../images/hero-about.png';
-import Card from '../components/Card.js';
 import Footer from '../components/Footer.js';
+import heroInsp1 from '../images/hero-insp-1.jpg';
+import heroInsp2 from '../images/hero-insp-2.jpg';
+import heroInsp3 from '../images/hero-insp-3.jpg';
+
 
 export default function Home() {
   return (
@@ -22,7 +25,7 @@ export default function Home() {
             </NavLink>
           </div>
           <div>
-            <img src={heroPicture} alt="hero image" className="image" />
+            <img src={heroPicture} alt="heroImage" className="image" />
           </div>
         </main>
       </Container>
@@ -34,18 +37,18 @@ export default function Home() {
       ></div>
       <div style={{ backgroundColor: '#E9DCCB', minHeight: '100px' }}>
         <Container maxWidth="xl">
-          <h3 className="heading heading_full">We’re Currently Reading</h3>
+          <h3 className="heading heading_full">Find your inspiration here</h3>
           <div className="block">
-            <Card />
-            <Card />
-            <Card />
+            <img src={heroInsp1} alt="cover" className="card" />
+            <img src={heroInsp2} alt="cover" className="card" />
+            <img src={heroInsp3} alt="cover" className="card" />
           </div>
         </Container>
       </div>
 
       <Container maxWidth="xl" style={{ minHeight: '100px' }}>
         <div className="block block_margins">
-          <img src={aboutImg} alt="hero image" className="image" />
+          <img src={aboutImg} alt="heroImage" className="image" />
           <div className=" layout layout_alt">
             <p className="heading desc_common desc_common_green mx-4">
               Use Bookclubs to manage your library’s in-person and online book

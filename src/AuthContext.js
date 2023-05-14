@@ -44,6 +44,7 @@ export function AuthProvider({ children }) {
         photoURL: photo,
       }).then(() => {
         console.log('success');
+        console.log(auth.currentUser);
       });
     }
   };

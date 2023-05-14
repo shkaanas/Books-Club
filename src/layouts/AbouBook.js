@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-//components
 import Loader from '../components/Loader.js';
 import CommentCard from '../components/CommentCard';
 import { useAuth } from '../AuthContext';
-//firestore
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-//mui
 import { Container } from '@mui/system';
 import Rating from '@mui/material/Rating';
-//images
 import whiteDecor from '../images/white-decor.png';
 import coverImg from '../images/book.png';
 
@@ -38,7 +34,6 @@ export default function AboutBook() {
     }
 
     getPosts();
-    // console.log(commentsList);
   }, []);
 
   //saving data to the firebase
